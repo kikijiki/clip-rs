@@ -1,0 +1,29 @@
+[package]
+name = "clip-rs"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = { version = "1", features = ["backtrace"] }
+candle-core = { version = "0.4" }
+candle-nn = "0.4"
+candle-transformers = "0.4"
+clap = { version = "4.5", features = ["derive"] }
+image = { version = "0.24", default-features = false, features = ["jpeg", "png"] }
+imageproc = { version = "0.23", default-features = false }
+rand = "0.8"
+rand_distr = "0.4"
+regex = "1.10"
+safetensors = "0.4"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokenizers = { version = "0.15", default-features = false, features = ["onig"] }
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+[features]
+#default = ["cudnn"]
+cuda = ["candle-core/cuda", "candle-nn/cuda", "candle-transformers/cuda"]
+cudnn = ["cuda", "candle-core/cudnn"]
